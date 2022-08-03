@@ -22,6 +22,10 @@ db=firebase.database()
 
 @app.route('/')
 def home():
+	if login_session['user'] is None:
+		name = "user"
+	else:
+		name=db.child("users").child(login_session['user']['localId']).set(user)
 	return render_template("index.html")
 
 @app.route('/about')
@@ -39,20 +43,33 @@ def signUp():
 			user={
 			"name": request.form['name'] ,
 			"email": request.form['email'] ,
-			"password": request.form['password'] , 
+			"password": request.form['password']
 			}
 			db.child("users").child(login_session['user']['localId']).set(user)
 			return redirect(url_for('home'))
 		except:
 			error = "Authentication failed"
-		return render_template("signup.html")
-	return render_template("SignUp.html")
+	return render_template("signUp.html")
 
 
 
-@app.route('/SignIn')
+@app.route('/signIn' , methods=['GET', 'POST'])
 def signIn():
-	return render_template("signIn.html")
+	error = ""
+	if request.method == 'POST':
+		print('12345678')
+
+		email = request.form['email']
+		password = request.form['password']
+		try:
+			login_session['user'] =auth.sign_in_with_email_and_password(email, password)
+			print('egfhsvfhs')
+			return redirect(url_for('home'))
+		except:
+			error = "Authentication failed"
+	return render_template("signin.html")
+
+
 
 
 @app.route('/post')

@@ -29,8 +29,8 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Home</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/about">About</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/post">Example Post</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/SignIn">SignUp</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/SignIn">SignIn</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/signUp">SignUp</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/signIn">SignIn</a></li>
                     </ul>
                 </div>
             </div>
@@ -57,18 +57,18 @@
                         <div class="my-5">
                             <form id="contactForm" data-sb-form-api-token="API_TOKEN" method="post" action="/signUp">
                                 <div class="form-floating">
-                                    <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                                    <input input type="name"  name="name"class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
                                     <label for="name">Name</label>
                                     <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
                                 </div>
                                 <div class="form-floating">
-                                    <input class="form-control" id="email" type="email" placeholder="Enter your email..." data-sb-validations="required,email" />
+                                    <input input type="email"  name="email" class="form-control" id="email" type="email" placeholder="Enter your email..." data-sb-validations="required,email" />
                                     <label for="email">Email address</label>
                                     <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
                                     <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
                                 </div>
                                 <div class="form-floating">
-                                    <input class="form-control" id="password" type="tel" placeholder="Enter your Password..." data-sb-validations="required" />
+                                    <input input type="password"  name="password" class="form-control" id="password" type="tel" placeholder="Enter your Password..." data-sb-validations="required" />
                                     <label for="password">Password</label>
                                     <div class="invalid-feedback" data-sb-feedback="password:required">A password is required.</div>
                                 </div>
@@ -78,14 +78,10 @@
                                 <div>
                                     <input type="submit"/>
                                 </div>
-                                <!-- Submit error message-->
-                                <!---->
-                                <!-- This is what your users will see when there is-->
-                                <!-- an error submitting the form-->
-                                <!-- <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div> -->
-                                <!-- Submit Button-->
-<!--                                 <button type="" class="btn btn-primary text-uppercase disabled" id="submitButton" type="submit">Send</button> -->
-                            </form>
+                                
+                                <!-- div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                                <button type="" class="btn btn-primary text-uppercase disabled" id="submitButton" type="submit">Send</button>
+                            </form> -->
                         </div>
                     </div>
                 </div>
