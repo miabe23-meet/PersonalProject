@@ -22,12 +22,13 @@ db=firebase.database()
 
 @app.route('/')
 def home():
-	if login_session['user'] is None:
-	 	name = {"name":"user"}
-	 	ok=True
-	else:
-		name=db.child("users").child(login_session['user']['localId']).get().val()
-		ok=False
+	if 'user' in login_session:
+		if login_session['user'] is None:
+		 	name = {"name":"user"}
+		 	ok=True
+		else:
+			name=db.child("users").child(login_session['user']['localId']).get().val()
+			ok=False
 	return render_template("index.html",name = name, display= ok)
 
 
