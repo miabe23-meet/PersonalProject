@@ -20,6 +20,29 @@ firebase=pyrebase.initialize_app(config)
 auth=firebase.auth()
 db=firebase.database()
 
+@app.route('/signIn' , methods=['GET', 'POST'])
+def signIn():
+	if login_session['user'] is None:
+	 	name = {"name":"user"}
+	 	ok=True
+	else:
+		name=db.child("users").child(login_session['user']['localId']).get().val()
+		ok=False
+	error = ""
+	if request.method == 'POST':
+		print('12345678')
+
+		email = request.form['email']
+		password = request.form['password']
+		try:
+			login_session['user'] =auth.sign_in_with_email_and_password(email, password)
+			print('egfhsvfhs')
+			return redirect(url_for('home'))
+		except:
+			error = "Authentication failed"
+	return render_template("signin.html", name=name)
+
+
 @app.route('/')
 def home():
 	if 'user' in login_session:
@@ -72,28 +95,6 @@ def signUp():
 	return render_template("signUp.html", name=name , display=ok)
 
 
-
-@app.route('/signIn' , methods=['GET', 'POST'])
-def signIn():
-	if login_session['user'] is None:
-	 	name = {"name":"user"}
-	 	ok=True
-	else:
-		name=db.child("users").child(login_session['user']['localId']).get().val()
-		ok=False
-	error = ""
-	if request.method == 'POST':
-		print('12345678')
-
-		email = request.form['email']
-		password = request.form['password']
-		try:
-			login_session['user'] =auth.sign_in_with_email_and_password(email, password)
-			print('egfhsvfhs')
-			return redirect(url_for('home'))
-		except:
-			error = "Authentication failed"
-	return render_template("signin.html", name=name)
 
 
 @app.route('/post')
