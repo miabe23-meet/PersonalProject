@@ -23,17 +23,33 @@ db=firebase.database()
 @app.route('/')
 def home():
 	if login_session['user'] is None:
-		name = "user"
+	 	name = {"name":"user"}
+	 	ok=True
 	else:
-		name=db.child("users").child(login_session['user']['localId']).set(user)
-	return render_template("index.html")
+		name=db.child("users").child(login_session['user']['localId']).get().val()
+		ok=False
+	return render_template("index.html",name = name, display= ok)
+
 
 @app.route('/about')
 def about():
-	return render_template("about.html")
+	if login_session['user'] is None:
+	 	name = {"name":"user"}
+	 	ok=True
+	else:
+		name=db.child("users").child(login_session['user']['localId']).get().val()
+		ok=False
+	return render_template("about.html" , name=name, display=ok)
+
 
 @app.route('/signUp' , methods=['GET', 'POST'])
 def signUp():
+	if login_session['user'] is None:
+	 	name = {"name":"user"}
+	 	ok=True
+	else:
+		name=db.child("users").child(login_session['user']['localId']).get().val()
+		ok=False
 	error = ""
 	if request.method == 'POST':
 		email = request.form['email']
@@ -49,12 +65,18 @@ def signUp():
 			return redirect(url_for('home'))
 		except:
 			error = "Authentication failed"
-	return render_template("signUp.html")
+	return render_template("signUp.html", name=name , display=ok)
 
 
 
 @app.route('/signIn' , methods=['GET', 'POST'])
 def signIn():
+	if login_session['user'] is None:
+	 	name = {"name":"user"}
+	 	ok=True
+	else:
+		name=db.child("users").child(login_session['user']['localId']).get().val()
+		ok=False
 	error = ""
 	if request.method == 'POST':
 		print('12345678')
@@ -67,14 +89,24 @@ def signIn():
 			return redirect(url_for('home'))
 		except:
 			error = "Authentication failed"
-	return render_template("signin.html")
-
-
+	return render_template("signin.html", name=name)
 
 
 @app.route('/post')
 def post():
-	return render_template("post.html")
+	if login_session['user'] is None:
+	 	name = {"name":"user"}
+	 	ok=True
+	else:
+		name=db.child("users").child(login_session['user']['localId']).get().val()
+		ok=False
+	return render_template("post.html", name = name, display=ok )
+
+@app.route('/signOut')
+def signOut():
+	login_session['user'] = None
+	auth.current_user = None
+	return redirect(url_for('home'))
 
 if __name__ == '__main__':
 	app.run(debug = True)
