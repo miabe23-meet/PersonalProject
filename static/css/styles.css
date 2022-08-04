@@ -76,6 +76,28 @@
   }
 }
 
+#sub {
+  background-color: #006666;; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+#sib {
+  background-color: #339966;; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
